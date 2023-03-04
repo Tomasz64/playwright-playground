@@ -1,4 +1,4 @@
-import { expect, Locator, Page } from '@playwright/test';
+import { Locator, Page } from '@playwright/test';
 import { verifyObjectVisiblity, verifyItemsInContainer } from '../helper_methods/helperMethods'
 
 export class MainPage {
@@ -6,10 +6,16 @@ export class MainPage {
     readonly address: string = "http://www.uitestingplayground.com/";
     readonly websiteTitle: string = "UI Test Automation Playground";
 
-    readonly tableItems = ["Dynamic ID", "Class Attribute", "Hidden Layers", "Load Delay",
+    readonly tableItemsHeadersArr = ["Dynamic ID", "Class Attribute", "Hidden Layers", "Load Delay",
     "AJAX Data", "Client Side Delay", "Click", "Text Input", "Scrollbars", "Dynamic Table",
     "Verify Text", "Progress Bar", "Visibility", "Sample App", "Mouse Over", "Non-Breaking Space",
     "Overlapped Element", "Shadow DOM"];
+    readonly tableItemsTextsArr = ["Make sure you are not recording dynamic IDs of elements","Check that class attribute based XPath is well formed","Verify that your test does not interact with elements invisible because of z-order",
+    "Ensure that a test is capable of waiting for a page to load","Some elements may appear on a page after loading data with AJAX request","Some elements may appear after client-side time consuming JavaScript calculations",
+    "Event based click on an element may not always work","Entering text into an edit field may not have effect","Scrolling an element into view may be a tricky task",
+    "Verify cell value in a dynamic table","Finding an element by displayed text has nuances","Follow the progress of a lengthy process and continue upon completion",
+    "Check if element is visible on screen","Demo application with dynamically generated element attributes","Placing mouse over an element may change DOM and make the element unavailable",
+    "Non-breaking space looks like a normal one on screen. It may lead to confusion when building XPath","Make element visible to enter text","Look inside Shadow DOM component"];
 
     //Navigation Bar
     readonly logo: Locator
@@ -17,16 +23,19 @@ export class MainPage {
     readonly resourcesButton: Locator;
     readonly navBar: Locator;
     //End of Navigation Bar
-
+    //Main content
     readonly title: Locator;
     readonly blockquote: Locator;
     readonly alertBox: Locator;
     readonly paragraph: Locator;
     readonly rubickCubeImage: Locator;
     readonly rubickCubeFooter: Locator;
+    //End of Main Content
+    //Table
     readonly table: Locator;
-    readonly tableItemHeaders: Locator;
-
+    readonly tableItemsHeaders: Locator;
+    readonly tableItemsTexts: Locator;
+    //End of Table
 
 
     constructor(page: Page) {
@@ -50,28 +59,37 @@ export class MainPage {
         
         //table//
         this.table = page.locator("//div[@class='container'");
-        this.tableItemHeaders = page.locator("//div[@class='container']//h3/a");
+        this.tableItemsHeaders = page.locator("//div[@class='container']//h3/a");
+        this.tableItemsTexts = page.locator("//section[@id='overview']//div[@class='container']//div[@class='col-sm']//p");
         //end of table//
     }
 
     async verifyNavbar() {
-        await verifyObjectVisiblity(this.page, this.navBar);
-        await verifyObjectVisiblity(this.page, this.logo);
-        await verifyObjectVisiblity(this.page, this.homeButton);
-        await verifyObjectVisiblity(this.page, this.resourcesButton);
+        await verifyObjectVisiblity(this.navBar);
+        await verifyObjectVisiblity(this.logo);
+        await verifyObjectVisiblity(this.homeButton);
+        await verifyObjectVisiblity(this.resourcesButton);
     }
 
     async verifyMainPage() {
-        await verifyObjectVisiblity(this.page, this.title);
-        await verifyObjectVisiblity(this.page, this.blockquote);
-        await verifyObjectVisiblity(this.page, this.alertBox);
-        await verifyObjectVisiblity(this.page, this.paragraph);
-        await verifyObjectVisiblity(this.page, this.rubickCubeImage);
-        await verifyObjectVisiblity(this.page, this.rubickCubeFooter);
+        await verifyObjectVisiblity(this.title);
+        await verifyObjectVisiblity(this.blockquote);
+        await verifyObjectVisiblity(this.alertBox);
+        await verifyObjectVisiblity(this.paragraph);
+        await verifyObjectVisiblity(this.rubickCubeImage);
+        await verifyObjectVisiblity(this.rubickCubeFooter);
     }
 
     async verifyHeadersInTable(){
-        await verifyItemsInContainer(this.page, this.tableItemHeaders, this.tableItems);
+        await verifyItemsInContainer(this.tableItemsHeaders, this.tableItemsHeadersArr);
+    }
+
+    async verifyTextsInTable(){
+        await verifyItemsInContainer(this.tableItemsTexts, this.tableItemsTextsArr);
+    }
+
+    async verifyFooter() {
+        //todo
     }
 
 }
