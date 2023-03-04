@@ -9,4 +9,4 @@ Basically:
 - Jenkins deploys dynamic docker agent with [Playwright docker](https://hub.docker.com/_/microsoft-playwright) image
 - This repository is pulled to the Playwright workspace
 - Tests are executed
-- Report is generated and submitted to Jenkins HTML reports
+- Report is generated and submitted to Jenkins [HTML reports](https://plugins.jenkins.io/htmlpublisher/)
