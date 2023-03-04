@@ -9,3 +9,4 @@ Basically:
 - Jenkins pulls tests from repository and runs them inside Playwright container
 - Report is generated and submitted to Jenkins HTML reports
 
+This [Repo](https://github.com/Tomasz64/playwright-playground-jenkins-job) contains job that creates dynamic agent which pulls playwright docker image and executes all tests.
