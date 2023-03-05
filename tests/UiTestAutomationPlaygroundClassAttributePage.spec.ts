@@ -2,13 +2,13 @@ import { test } from '@playwright/test';
 import { ClassAttribute } from '../page/classAttribute.page';
 import { loadPage, verifyTitle } from '../helper_methods/helperMethods'
 
-test('Load DynamicID page and verify title', async ({ page }) => {
+test('Load ClassAttribute page and verify title', async ({ page }) => {
     const webpage = new ClassAttribute(page);
     await loadPage(page, webpage.address);
     await verifyTitle(page, webpage.websiteTitle);
 });
 
-test('Verify DynamicID page contents', async ({ page }) => {
+test('Verify ClassAttribute page contents', async ({ page }) => {
     const webpage = new ClassAttribute(page);
     await loadPage(page, webpage.address);
     await webpage.verifyContentVisibility();
