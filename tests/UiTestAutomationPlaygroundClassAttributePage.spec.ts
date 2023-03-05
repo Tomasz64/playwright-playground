@@ -1,21 +1,22 @@
 import { test } from '@playwright/test';
-import { DynamicIdPage } from '../page/dynamicId.page';
+import { ClassAttribute } from '../page/classAttribute.page';
 import { loadPage, verifyTitle } from '../helper_methods/helperMethods'
 
 test('Load DynamicID page and verify title', async ({ page }) => {
-    const webpage = new DynamicIdPage(page);
+    const webpage = new ClassAttribute(page);
     await loadPage(page, webpage.address);
     await verifyTitle(page, webpage.websiteTitle);
 });
 
 test('Verify DynamicID page contents', async ({ page }) => {
-    const webpage = new DynamicIdPage(page);
+    const webpage = new ClassAttribute(page);
     await loadPage(page, webpage.address);
-    await webpage.verifyDynamicIDPage();
+    await webpage.verifyContentVisibility();
+    await webpage.verifyButtonsVisibility();
 });
 
-test('Click DynamicID button', async ({ page }) => {
-    const webpage = new DynamicIdPage(page);
+test('Verify Blue button alert generation', async ({ page }) => {
+    const webpage = new ClassAttribute(page);
     await loadPage(page, webpage.address);
-    await webpage.clickDynamicIDButton();
+    await webpage.verifyButtonWithAlert();
 });
